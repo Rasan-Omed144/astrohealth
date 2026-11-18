@@ -1,0 +1,3 @@
+OUR ORIGINAL SIX-PAGE LAYOUT + FRIEND LIME GREEN + BLACK HOLE BACKGROUND
+NOV 15 FIX: Mission Control panel, Daily Log form, NASA Research Data library/search
+Launch on http://127.0.0.1:8001

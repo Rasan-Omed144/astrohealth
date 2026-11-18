@@ -1,0 +1,63 @@
+/* Targeted November 15 fixes — preserve six-page layout and teammate's green theme. */
+/* The global green .panel background had hidden this photograph entirely. */
+#control-view .control-image {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0;
+  min-height: 270px;
+  overflow: hidden;
+  background-color: #151c14 !important;
+  background-image: linear-gradient(0deg, rgba(10,16,11,.98), rgba(10,17,12,.82) 49%, rgba(10,17,12,.22) 100%), url('assets/control-hero.jpg') !important;
+  background-size: cover, cover !important;
+  background-position: center, center !important;
+  background-repeat: no-repeat !important;
+}
+.control-image-content { position:relative; padding: 24px; max-width: 600px; }
+.control-image-content .eyebrow { color: #c5f36b !important; letter-spacing: .09em; }
+.control-image-content h3 { font: 700 clamp(15px, 1.3vw, 19px) 'Space Grotesk', sans-serif; margin: 10px 0; color:#f6f9f1; }
+.control-image-content p { color:#cedbc7; font-size: 11px; line-height: 1.6; margin:0 0 13px; }
+.control-image-link { border: 1px solid #829b61; border-radius:7px; background:rgba(33,48,25,.78); color:#d7fca7; padding:9px 13px; cursor:pointer; font:600 11px 'DM Sans',sans-serif; }
+.control-image-link:hover { background:#31462b; }
+/* Keep the native modal above the frosted theme layers and make every control usable. */
+.checkin-dialog[open] { position:fixed; z-index:2147483647; pointer-events:auto; }
+.checkin-dialog form { position:relative; z-index:1; }
+.checkin-dialog input,.checkin-dialog select,.checkin-dialog button { pointer-events:auto; }
+.checkin-dialog input[type="range"] { width:100%; min-width:0; cursor:pointer; accent-color:#c5f36b !important; }
+.checkin-dialog select,.checkin-dialog .number-input { color:#f3f8ef !important; background:#20291e !important; }
+.checkin-dialog button:disabled { opacity:.6; cursor:wait; }
+.checkin-save-status { color:#d9f7b6; min-height:17px; font-size:11px; margin:9px 0 0; }
+/* Research: start as a quiet library; open a compact searchable dataset only on request. */
+#research-browser[hidden] { display:none !important; }
+.research-dataset-list { margin-top:18px; }
+.research-dataset-card { min-height:190px !important; padding:20px !important; gap:9px !important; align-content:start; }
+.research-dataset-card .research-dataset-id { font-size:10px; font-weight:700; letter-spacing:.08em; color:#c5f36b !important; }
+.research-dataset-card strong { font-size:16px !important; line-height:1.35; color:#f5f9f0 !important; }
+.research-dataset-description { font-size:11px; color:#c8d7c0; line-height:1.55; }
+.research-card-action { font-size:11px; font-weight:700; margin-top:10px; color:#c5f36b; }
+.research-dataset-card.selected { border-color:#c5f36b !important; box-shadow:inset 0 0 0 1px #c5f36b33 !important; }
+.research-browser { margin-top:7px; }
+.research-browser .panel-heading { align-items:flex-start; flex-wrap:wrap; gap:14px; }
+.research-close { white-space:normal; }
+.research-browser-hint { font-size:11px; color:#bfceba; }
+.research-source-file { text-align:left !important; margin:8px 0 4px; }
+.research-filters { grid-template-columns:repeat(4, minmax(0,1fr)); align-items:end; }
+.research-filters input[type="search"] { width:100%; min-height:36px; border-radius:7px; padding:7px 9px; }
+.research-table { min-width:700px; }
+.research-table th { font-size:10px !important; }
+.research-table td { font-size:11px !important; }
+.research-row-detail { min-width:95px; }
+.research-row-detail summary { color:#c5f36b; font-weight:700; cursor:pointer; }
+.research-detail-block { position:relative; z-index:1; margin-top:8px; background:rgba(28,39,27,.98); border:1px solid #566b4a; border-radius:8px; padding:9px 12px; min-width:200px; max-width:300px; }
+.research-detail-block p { margin:6px 0; line-height:1.45; overflow-wrap:anywhere; color:#dee8d8; }
+.research-detail-block strong { color:#c5f36b; }
+@media(max-width:1100px) { .research-filters { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:620px) {
+  .control-image-content { padding:16px; }
+  .research-dataset-list { grid-template-columns:1fr !important; }
+  .research-filters { grid-template-columns:1fr; }
+  .research-browser .panel-heading { display:block; }
+  .research-close { margin-top:12px; }
+  .research-pagination { flex-wrap:wrap; gap:10px; }
+}

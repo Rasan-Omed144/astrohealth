@@ -1,0 +1,154 @@
+/* AstroHealth — ORIGINAL 6-PAGE LAYOUT + TEAMMATE GREEN PALETTE
+   This stylesheet changes COLOURS and BACKDROP only, NOT the original layout.
+   The design remains our original astronaut-first six-screen interface.
+   Palette adapted from the teammate's Astro final design.
+   Original app data, frontend JS, and FastAPI endpoints are unchanged.
+*/
+:root {
+  color-scheme:dark;
+  --bg:#101210 !important;
+  --sidebar:#141614 !important;
+  --panel:#171a17 !important;
+  --panel-soft:#1e241c !important;
+  --border:#354034 !important;
+  --line:#354034 !important;
+  --ink:#f2f3ef !important;
+  --text:#f2f3ef !important;
+  --muted:#a6afa2 !important;
+  --dim:#758171 !important;
+  --green:#c5f36b !important;
+  --lime:#c5f36b !important;
+  --gold:#c5f36b !important;
+  --amber:#c5f36b !important;
+  --blue:#8adfd3 !important;
+  --red:#ee826e !important;
+}
+html { background-color:#101210 !important; }
+body {
+  color:#f2f3ef !important;
+  background-color:#101210 !important;
+  background-image:
+    linear-gradient(90deg, rgba(9,12,10,.79), rgba(9,12,10,.43) 43%, rgba(9,12,10,.74)),
+    url('assets/mission-black-hole.svg') !important;
+  background-size:cover,cover !important;
+  background-position:center center,center 36% !important;
+  background-repeat:no-repeat,no-repeat !important;
+  background-attachment:fixed,fixed !important;
+}
+body::before { display:none !important; content:none !important; }
+.app-shell, .main-content { background:transparent !important; background-image:none !important; }
+.sidebar {
+  background:linear-gradient(180deg,rgba(20,23,19,.97),rgba(15,19,16,.94)) !important;
+  border-right-color:#384431 !important;
+  box-shadow:8px 0 28px rgba(0,0,0,.20) !important;
+  backdrop-filter:blur(14px);
+}
+.sidebar::before { background:radial-gradient(ellipse at 50% 100%,#5e7c3e44,transparent 75%) !important; }
+.brand { border-color:#3b4835 !important; }
+.brand-name, .brand-name span { color:#f2f3ef !important; }
+.brand-tagline,.brand-name small,.sidebar-note,.sidebar-note b { color:#c5f36b !important; }
+.mission-switcher,.connection-card,.sidebar .user-card {
+  background:rgba(28,34,26,.91) !important;
+  border-color:#3b4936 !important;
+}
+.mission-switcher strong,.user-card strong { color:#f2f3ef !important; }
+.mission-live i,.heading-dot,.clock-dot,.status-dot,.mission-active-dot {
+  background:#c5f36b !important;
+  box-shadow:0 0 12px #c5f36b77 !important;
+}
+.nav-item { color:#b5c0b0 !important; }
+.nav-item:hover { color:#f4f7ed !important; background:#252e22 !important; border-color:#40513a !important; }
+.nav-item.active {
+  color:#d7f6a6 !important;
+  background:linear-gradient(90deg,#34452a,#263022 75%,#1b231a) !important;
+  border-color:#718c50 !important;
+  box-shadow:inset 3px 0 #c5f36b,0 0 18px #c5f36b16 !important;
+  text-shadow:none !important;
+}
+.nav-item.active .nav-icon { color:#c5f36b !important; }
+.nav-count,.nav-alert-count { background:#34452b !important; color:#d8f6ab !important; }
+.topbar {
+  background:rgba(16,19,16,.86) !important;
+  border-bottom-color:#3b4835 !important;
+  backdrop-filter:blur(15px);
+}
+.mission-pill,.topbar-connection {
+  background:rgba(30,36,28,.92) !important;
+  border-color:#43513d !important;
+  color:#c5d2be !important;
+}
+.mission-pill strong,.mission-pill b,.clock-top { color:#c5f36b !important; }
+.page-heading,.page-heading.cinematic-hero {
+  background:linear-gradient(100deg,rgba(24,30,22,.91),rgba(21,29,22,.67)) !important;
+  border-color:#46563e !important;
+  box-shadow:0 16px 32px #0004 !important;
+  backdrop-filter:blur(8px);
+}
+/* Keep our original photographic/cinematic hero composition, but tint it green. */
+.page-heading::before { opacity:.32 !important; filter:saturate(.64) hue-rotate(42deg) brightness(.7) !important; }
+.page-heading::after { border-color:#c5f36b55 !important; box-shadow:0 0 38px #c5f36b22 !important; }
+.page-heading h1,.page-heading h1 strong { color:#f6f8f2 !important; }
+.page-heading .eyebrow,.page-heading .heading-period,.welcome-line { color:#c5f36b !important; }
+.subheading,.eyebrow,.indicator-name,.indicator-baseline,.page-footer,.panel-heading .eyebrow { color:#a8b5a2 !important; }
+/* Transparent charcoal glass cards let the black-hole backdrop show through. */
+.panel,.dashboard-stat-card,.research-dataset-card,
+.timeline-quick .panel,.spacecraft-metric-card,.alerts-summary-grid .summary-card,
+.profile-metric-card,.roster-person,.space-foot-card,.alert-row,
+.research-browser,.research-table-wrap,.profile-history-panel,.profile-checkins {
+  background:rgba(22,28,21,.84) !important;
+  background-color:rgba(22,28,21,.84) !important;
+  border-color:rgba(127,156,102,.37) !important;
+  backdrop-filter:blur(11px);
+  box-shadow:0 9px 25px rgba(0,0,0,.22),inset 0 1px rgba(230,255,215,.04) !important;
+}
+.panel:hover,.research-dataset-card:hover { border-color:#66894b !important; }
+.panel-heading h2,.section-title h2,.profile-metric-card strong,
+.indicator-value,.score-ring strong,.timeline-stat-grid strong,.spacecraft-stats strong { color:#f3f6ef !important; }
+.primary-button {
+  background:linear-gradient(135deg,#d9ff9a,#c5f36b) !important;
+  border-color:#c5f36b !important;
+  color:#19220e !important;
+  box-shadow:0 5px 18px #c5f36b33 !important;
+}
+.primary-button:hover { filter:brightness(1.07); }
+.secondary-button,.select-button,.crew-select-wrap select,.profile-history-panel select,
+.research-filters select,.research-filters input,input,textarea {
+  background:#20291e !important;
+  color:#edf4e9 !important;
+  border-color:#526549 !important;
+}
+.chart-metric-dropdown {
+  background:#20291e !important;
+  color:#d9f7a9 !important;
+  border:1px solid #718d54 !important;
+  cursor:pointer;
+}
+.chart-metric-dropdown option { color:#f3f6ee !important; background:#1c261b !important; }
+button:focus-visible,select:focus-visible,input:focus-visible {
+  outline:2px solid #c5f36b !important; outline-offset:3px;
+}
+.text-button,.panel a,.crew-profile-button:hover strong,.research-dataset-card.active h3 { color:#c5f36b !important; }
+.status-pill.good,.roster-badge.ok { background:#283b24 !important; color:#bff19a !important; }
+.status-pill.watch,.roster-badge.review { background:#443627 !important; color:#eab66f !important; }
+.score-ring .ring-progress { stroke:#c5f36b !important; }
+.score-ring .ring-track { stroke:#364431 !important; }
+.chart-legend .legend-dot,.chart-legend .dot,.trend-line { color:#c5f36b !important; }
+.chart-svg .chart-line,.trend-chart .chart-line { stroke:#c5f36b !important; }
+.research-table thead th,.research-table tbody tr { background:rgba(20,27,20,.94) !important; color:#f0f3ed !important; border-color:#3b4937 !important; }
+.research-table tbody tr:nth-child(even) { background:rgba(27,36,25,.94) !important; }
+.research-table td { color:#d7e3d2 !important; border-color:#3b4937 !important; }
+.alert-row.selected { background:#35412c !important; border-color:#c5f36b !important; }
+.alert-inspector-value { color:#c5f36b !important; }
+.demo-banner { background:rgba(30,38,28,.92) !important; border-color:#617b49 !important; color:#d3e5c6 !important; }
+.has-crew-portrait { border-color:#98c76b !important; }
+.avatar.has-crew-portrait,.roster-avatar.has-crew-portrait,.profile-avatar.has-crew-portrait {
+  border-color:#8eb764 !important;
+}
+/* Preserve all original responsive layout rules. */
+@media(max-width:810px) {
+  body { background-attachment:scroll,scroll !important; background-position:center center,53% 33% !important; }
+  .sidebar { background:rgba(17,22,17,.97) !important; }
+}
+@media(prefers-reduced-transparency:reduce) {
+  .panel,.research-browser,.research-dataset-card { background:rgba(22,28,21,.96) !important; }
+}

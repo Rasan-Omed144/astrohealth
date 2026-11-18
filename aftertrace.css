@@ -1,0 +1,83 @@
+/* AstroHealth / AFTERTRACE colour edition – requested source palette.
+   HEX codes: bg 080C13, panel 101722, panel2 151E2B, ink EEF3F8,
+   muted 9AA9BA, line 283343, gold E8BC77, blue 9CBCE4, red DE9D7F.
+   Crew imagery is deliberately marked as illustrative; NASA research remains separate. */
+:root{
+  color-scheme:dark;
+  --bg:#080C13; --sidebar:#080C13; --panel:#101722; --panel-soft:#151E2B;
+  --border:#283343; --line:#283343; --muted:#9AA9BA; --text:#EEF3F8;
+  --ink:#EEF3F8; --gold:#E8BC77; --amber:#E8BC77; --blue:#9CBCE4;
+  --red:#DE9D7F; --green:#91CBB5;
+}
+body { background:linear-gradient(130deg,#080C13 0%,#0B111A 52%,#080C13 100%);color:var(--ink); }
+body::before{opacity:.14}
+.sidebar{background:linear-gradient(180deg,#101722 0%,#080C13 70%,#0D141E 100%);border-color:#283343;box-shadow:inset -2px 0 9px #9cbce40b,5px 0 25px #0004}
+.sidebar::before{opacity:.36}
+.brand{border-bottom-color:#283343}
+.brand-name{color:#eef3f8}
+.brand-name span,.brand-tagline{color:#e8bc77}
+.mission-switcher{background:#151e2b;border-color:#283343;box-shadow:none}
+.mission-live i,.heading-dot,.clock-dot{background:#91cbb5;box-shadow:0 0 8px #91cbb566}
+.nav-item{color:#afbdca;border-color:transparent}
+.nav-item:hover{background:#151e2b;color:#eef3f8;border-color:#283343}
+.nav-item.active{background:linear-gradient(90deg,#433624,#241f1b 74%,#151e2b);color:#f5d4a2;border:1px solid #b48c55;box-shadow:inset 3px 0 #e8bc77,0 0 16px #e8bc771b;text-shadow:none}
+.nav-alert-count{background:#b76258;color:#fff}
+.sidebar-note,.connection-card{border-color:#283343}
+.sidebar-note{color:#e8bc77}
+.topbar{background:#080c13eb;border-bottom:1px solid #283343}
+.mission-pill,.topbar-connection{background:#101722;border-color:#283343;color:#c7d3df}
+.mission-pill strong,.mission-pill b{color:#e8bc77}
+.mission-active-dot{background:#e8bc77;box-shadow:0 0 9px #e8bc7788}
+.page-heading{background:#101722;border-color:#283343}
+.page-heading .eyebrow,.page-heading .heading-period{color:#e8bc77}
+.page-heading::after{border-color:#9cbce433;box-shadow:0 0 32px #9cbce41a;opacity:.54}
+.page-heading::before{filter:saturate(.78) brightness(.87)}
+.panel,.dashboard-stat-card,.research-dataset-card{background:linear-gradient(146deg,#151e2beF,#101722fA);border:1px solid #283343;box-shadow:inset 0 1px #9cbce40a,0 9px 22px #0004}
+.panel:hover{border-color:#52677d}
+.panel-heading h2,.section-title h2,.profile-metric-card strong{color:#eef3f8}
+.eyebrow,.panel-heading .eyebrow,.subheading,.roster-info small,.page-footer{color:#9aa9ba}
+.primary-button{background:linear-gradient(135deg,#f2ce96,#e8bc77);border-color:#e8bc77;color:#20180f;box-shadow:0 5px 14px #e8bc7720}
+.secondary-button,.select-button,.crew-select-wrap select,.profile-history-panel select{background:#151e2b;color:#eef3f8;border:1px solid #3c4b5d}
+.secondary-button:hover{border-color:#e8bc77;color:#f4d1a1}
+.demo-banner,.research-provenance{background:#151e2b;border-color:#283343;color:#9aa9ba}
+.demo-banner strong,.research-provenance strong{color:#e8bc77}
+.hero-metrics>.panel,.timeline-quick .panel,.spacecraft-metric-card,.alerts-summary-grid .summary-card{background:linear-gradient(125deg,#151e2b,#101722)}
+.health-score-panel,.trend-panel,.timeline-main,.spacecraft-timeline,.alert-panel,.crew-panel,.research-browser{background:linear-gradient(138deg,#151e2b,#101722)!important;border-color:#283343!important}
+.score-ring .ring-progress{stroke:#e8bc77}
+.trend-chart #chart-line,.large-chart #large-line,.spacecraft-chart #spacecraft-chart-line{stroke:#9cbce4}
+.ledger-grid,.grid-line{stroke:#283343}
+.legend-line,.key-spark{background:#e8bc77;color:#e8bc77}
+.mini-sparkline,.status-pill.watch,.sim-tag,.text-button,.recommendation-link{color:#e8bc77}
+.text-button:hover,.recommendation-link:hover{color:#f7dcae}
+.indicator-card,.roster-person,.profile-metric-card,.space-foot-card{background:#101722;border-color:#283343}
+.roster-person:hover{background:#151e2b;border-color:#e8bc77}
+.roster-info strong,.indicator-value{color:#eef3f8}
+.research-dataset-card,.research-browser{color:#eef3f8!important}
+.research-dataset-card.selected{background:#302718!important;border:1px solid #e8bc77!important;box-shadow:inset 0 0 0 1px #e8bc7733!important}
+.research-dataset-card strong{color:#e8bc77!important}
+.research-filters select,.research-table tbody tr,.research-table thead th{background:#101722;color:#eef3f8;border-color:#283343}
+.research-table tbody tr:nth-child(even){background:#151e2b}
+.alert-row{background:#101722;border-color:#283343}
+.alert-row.selected{background:#332a20;border-color:#e8bc77}
+.alert-inspector-value{color:#e8bc77}
+.status-pill.good,.roster-badge.ok{background:#19362f;color:#a8ddc7}
+.status-pill.watch,.roster-badge.review{background:#403020;color:#e8bc77}
+/* Real dropdowns: selecting a named chart replaces its readings and graph. */
+.chart-metric-dropdown{
+ appearance:auto!important;display:block;min-width:190px;max-width:100%;
+ padding:9px 33px 9px 12px!important;border:1px solid #5c4c37!important;
+ border-radius:8px!important;cursor:pointer;color:#f3d5a1!important;
+ background:#151e2b!important;font:600 11px var(--font)!important;
+}
+.chart-metric-dropdown option{color:#eef3f8;background:#101722}
+.chart-metric-dropdown:focus-visible{outline:2px solid #e8bc77;outline-offset:2px}
+/* One unique white EVA portrait per fictional crew member. */
+.has-crew-portrait{background-size:cover!important;background-repeat:no-repeat!important;background-position:center 37%!important;color:transparent!important}
+.avatar.has-crew-portrait,.roster-avatar.has-crew-portrait,.profile-avatar.has-crew-portrait{border:2px solid #d3b17b!important;border-radius:50%!important;background-color:#101722!important;background-position:center 21%!important}
+.profile-avatar.has-crew-portrait{width:78px;height:78px;border-radius:50%!important}
+.astronaut-photo.has-crew-portrait{background-size:cover!important;background-position:center 31%!important;}
+/* keep crew images readable and consistently sized */
+.roster-avatar.has-crew-portrait{width:47px;height:47px;flex:none}
+.user-card .avatar.has-crew-portrait{height:34px;width:34px}
+@media(max-width:810px){.chart-metric-dropdown{min-width:155px}.sidebar{border-color:#283343}}
+@media(max-width:540px){.chart-metric-dropdown{width:100%;min-width:0}}

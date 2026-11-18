@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#101210" name="theme-color"/>
+<title>AstroHealth | NASA Space Apps Student Prototype</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="styles.css" rel="stylesheet"/>
+<link href="astro-theme.css" rel="stylesheet"/>
+<link href="cinematic.css" rel="stylesheet"/><link href="aftertrace.css?v=3" rel="stylesheet"/><link href="friends-green-cinematic.css?v=20261115" rel="stylesheet"/><link href="astrohealth-fixes.css?v=20261115b" rel="stylesheet"/></head>
+<body>
+<div class="app-shell">
+<aside class="sidebar">
+<a aria-label="AstroHealth Mission Health" class="brand" href="#"><span class="brand-reference-logo"><img alt="NASA-inspired insignia, used as a visual design reference" src="assets/nasa-reference-logo.png"/></span><span class="brand-name">Astro<span>Health</span><small>Astronaut Health Monitoring</small></span><span class="brand-tagline">Monitor · Analyze · Protect</span></a>
+<div class="mission-switcher">
+<span class="eyebrow">ACTIVE MISSION</span>
+<strong><span id="mission-name">Artemis III</span> <span class="chevron">⌄</span></strong>
+<span class="mission-live"><i></i> <span id="api-connection-label">CONNECTING TO LOCAL API</span></span>
+</div>
+<span class="eyebrow nav-label">MISSION WORKSPACE</span>
+<nav aria-label="Main navigation" class="navigation">
+<button class="nav-item active" data-view="astronaut"><span class="nav-icon">♡</span> Mission Health </button>
+<button class="nav-item" data-view="control"><span class="nav-icon">♟</span> Mission Control <span class="nav-count">5</span></button>
+<button class="nav-item" data-view="timeline"><span class="nav-icon">▥</span> Health Timeline </button>
+<button class="nav-item" data-view="spacecraft"><span class="nav-icon">✦</span> Spacecraft </button>
+<button class="nav-item" data-view="research"><span class="nav-icon">▤</span> Research Data </button>
+<button class="nav-item" data-view="alerts"><span class="nav-icon">♧</span> Alerts <span class="nav-alert-count" id="nav-alert-count">—</span></button>
+</nav>
+<div class="sidebar-note"><span class="reference-mark">✦</span><span><b>NASA Space Apps</b><small>Challenge 2026 · Student-built prototype</small></span></div><div class="sidebar-bottom">
+<div class="connection-card">
+<span class="connection-icon">⌁</span>
+<div><strong id="api-connection-title">API status</strong><span id="api-connection-detail">Connecting to local database…</span></div>
+<span class="status-dot"></span>
+</div>
+<button aria-label="Current user: Jordan Miller" class="user-card">
+<span class="avatar small">JM</span>
+<span><strong>Jordan Miller</strong><small>Commander</small></span>
+<span class="more">···</span>
+</button>
+</div>
+</aside>
+<main class="main-content">
+<header class="topbar"><div class="mission-pill"><span class="mission-active-dot"></span><strong>MISSION ACTIVE</strong><span class="pill-divider"></span><span id="breadcrumb-mission">Artemis III</span><span class="pill-divider"></span><span>MISSION DAY <b id="mission-day">042</b></span></div><span class="breadcrumb-access" id="breadcrumb-view">Mission health</span><div class="topbar-actions"><span class="clock-top" id="mission-time">UTC</span><span class="topbar-connection" title="Only local API connectivity">● LOCAL DEMO</span><button aria-haspopup="dialog" class="emergency-trigger" id="open-emergency" type="button">Emergency drill</button><button aria-label="Open alerts" class="icon-button notification-button" id="open-alerts">♧<i></i></button><span class="avatar">JM</span><span class="current-crew-name" id="current-crew-name">Jordan Miller <small>Selected demo astronaut</small></span></div></header>
+<section class="view active" id="astronaut-view">
+<div class="page-heading cinematic-hero">
+<div>
+<p class="eyebrow">INDIVIDUAL CREW STATUS <span class="heading-dot"></span> SIMULATED READINGS</p>
+<h1><span class="welcome-line">Welcome back,</span><strong id="hero-crew-name">Jordan Miller</strong></h1>
+<p class="subheading">Your personal demo readings, trends, and recorded observations.</p>
+</div>
+<div class="heading-actions"><label class="crew-select-wrap">SELECTED DEMO CREW <select aria-label="Select astronaut" id="crew-picker"></select></label><button class="secondary-button" id="overview-full-report" type="button">Full health report ↗</button><button class="primary-button" id="open-checkin"><span>＋</span> Daily check-in</button></div>
+</div>
+<div class="demo-banner"><span>ⓘ</span><span><strong>Prototype data:</strong> Health readings and mission environment below are simulated for demonstration—not live medical or NASA data.</span><button aria-label="Dismiss demo notice" id="dismiss-banner">×</button></div><div class="hero-metrics"><article class="panel key-status-card"><span class="key-icon">♡</span><div class="key-summary"><span>Indicators in demo range</span><strong id="overview-status-value">Loading…</strong><small>Configured reference comparison</small></div><span class="key-spark">⌁</span></article><article class="panel indicator-card key-indicator" data-metric="body_temperature">
+<div class="indicator-top"><span class="indicator-icon temperature">°</span><span class="status-pill good"><i></i> LOADING</span></div>
+<span class="indicator-name">Body temperature</span><div class="indicator-value">— <small>°C</small></div>
+<div class="indicator-baseline"><span>Baseline 36.2–37.3 °C</span><span class="mini-sparkline">—</span></div>
+</article><article class="panel indicator-card key-indicator" data-metric="blood_oxygen">
+<div class="indicator-top"><span class="indicator-icon oxygen">◉</span><span class="status-pill good"><i></i> LOADING</span></div>
+<span class="indicator-name">Blood oxygen</span><div class="indicator-value">— <small>%</small></div>
+<div class="indicator-baseline"><span>Baseline 96–99%</span><span class="mini-sparkline blue">—</span></div>
+</article><article class="panel indicator-card key-indicator" data-metric="sleep_duration">
+<div class="indicator-top"><span class="indicator-icon sleep">☾</span><span class="status-pill good" id="sleep-status"><i></i> LOADING</span></div>
+<span class="indicator-name">Sleep last night</span><div class="indicator-value"><span id="sleep-indicator-value">—</span> <small>hrs</small></div>
+<div class="indicator-baseline"><span>Baseline 7.0–8.0 hrs</span><span class="mini-sparkline amber">—</span></div>
+</article></div><div class="mission-stage"><section class="panel trend-panel">
+<div class="panel-heading">
+<div><span class="eyebrow">HEALTH TIMELINE</span><span class="info-dot" title="Illustrative trend data for this prototype.">i</span></div>
+<select aria-label="Select chart metric" class="select-button chart-metric-dropdown" id="metric-select"></select>
+</div>
+<div class="chart-summary"><strong id="chart-current">—</strong><span class="chart-delta positive">Loading saved trend…</span></div>
+<div class="chart-wrap">
+<div class="chart-y-labels"><span>90</span><span>80</span><span>70</span><span>60</span></div>
+<svg aria-label="Resting heart rate trend over the last 30 days" class="trend-chart" preserveaspectratio="none" role="img" viewbox="0 0 620 156">
+<defs>
+</defs>
+<line class="grid-line" x1="0" x2="620" y1="18" y2="18"></line>
+<line class="grid-line" x1="0" x2="620" y1="58" y2="58"></line>
+<line class="grid-line" x1="0" x2="620" y1="98" y2="98"></line>
+<line class="grid-line" x1="0" x2="620" y1="138" y2="138"></line>
+<line class="baseline-line" x1="0" x2="620" y1="90" y2="90"></line>
+<path d="M0,92 C30,86 40,88 66,78 S103,91 132,75 S170,82 198,69 S240,84 264,70 S302,78 330,59 S368,69 396,51 S434,76 462,62 S500,68 528,43 S566,58 594,40 S610,47 620,33 L620,156 L0,156 Z" fill="none" id="chart-area"></path>
+<path d="M0,92 C30,86 40,88 66,78 S103,91 132,75 S170,82 198,69 S240,84 264,70 S302,78 330,59 S368,69 396,51 S434,76 462,62 S500,68 528,43 S566,58 594,40 S610,47 620,33" fill="none" id="chart-line" stroke="#a7d8f0" stroke-width="2.5" vector-effect="non-scaling-stroke"></path>
+<circle cx="620" cy="33" fill="#a7d8f0" r="4.5" stroke="#ffffff" stroke-width="3" vector-effect="non-scaling-stroke"></circle>
+</svg>
+<div class="chart-x-labels"><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span></div>
+</div>
+<div class="chart-legend"><span><i class="legend-line"></i> Your readings</span><span><i class="legend-dash"></i> Personal baseline</span></div>
+</section><section class="panel alert-panel">
+<div class="panel-heading"><div><span class="eyebrow">PATTERN WATCH</span><span class="alert-counter">—</span></div><button class="text-button" id="review-alert">Review <span>↗</span></button></div>
+<div class="alert-body"><span class="alert-icon">↘</span><div><h3>Loading recent sleep readings…</h3><p>Pattern summary updates from the latest saved measurements.</p></div></div>
+<button class="recommendation-link" id="recommendation-toggle">See suggested next steps <span>＋</span></button>
+<div class="recommendation-details" hidden="" id="recommendation-details"><p>Consider reviewing your rest schedule and noting any changes in workload. If this continues, discuss it with mission medical support.</p></div>
+</section><article class="panel astronaut-portrait-panel"><div aria-label="AI-generated portrait of the selected fictional astronaut wearing a spacewalking suit" class="astronaut-photo" role="img"></div><div class="portrait-caption"><span class="portrait-medal">✓</span><div><strong>Selected astronaut report</strong><p id="portrait-name">Jordan Miller · simulated crew</p></div></div><button class="portrait-report" id="portrait-full-report" type="button">View Full Report ↗</button></article></div><div class="mission-bottom"><section class="panel health-score-panel">
+<div class="panel-heading">
+<div><span class="eyebrow">INDICATORS IN RANGE</span><span class="info-dot" title="Share of available readings within the prototype's configured reference ranges. Illustrative only.">i</span></div>
+<button class="text-button" data-navigate="timeline">View history <span>↗</span></button>
+</div>
+<div class="score-content">
+<div aria-label="Health score 87 out of 100" class="score-ring">
+<svg aria-hidden="true" viewbox="0 0 160 160">
+<circle class="ring-track" cx="80" cy="80" r="68"></circle>
+<circle class="ring-progress" cx="80" cy="80" r="68"></circle>
+</svg>
+<div><strong id="health-score-value">—</strong><span>%</span></div>
+</div>
+<div class="score-summary">
+<span class="status-pill good" id="health-score-status"><i></i> DEMO SUMMARY</span>
+<h2>Demo summary,<br/><span id="health-score-name">Jordan</span>.</h2>
+<p id="health-score-description">Calculating available readings against configured demo ranges.</p>
+<div class="score-change" id="health-score-change"><span>•</span> Demo reference ranges <span class="muted">not clinical guidance</span></div>
+</div>
+</div>
+<div class="score-footer"><span>AVAILABLE INDICATORS</span><span id="health-score-count">— readings</span></div>
+</section><section class="health-metrics-wrap"><div class="health-metrics-header"><div><span class="eyebrow">PERSONAL HEALTH</span><h2>Health metrics</h2></div><button class="text-button" id="health-metrics-report" type="button">Full report ↗</button></div><div class="indicator-grid">
+<article class="panel indicator-card" data-metric="resting_heart_rate">
+<div class="indicator-top"><span class="indicator-icon heart">♡</span><span class="status-pill good"><i></i> LOADING</span></div>
+<span class="indicator-name">Heart rate · live demo</span><div class="indicator-value"><span id="heart-rate-live-value">—</span> <small>bpm</small></div>
+<div class="indicator-baseline"><span>Baseline 62–72 bpm</span><span class="mini-sparkline green">—</span></div>
+</article>
+<article class="panel indicator-card" data-metric="exercise_minutes">
+<div class="indicator-top"><span class="indicator-icon exercise">↗</span><span class="status-pill good"><i></i> LOADING</span></div>
+<span class="indicator-name">Exercise today</span><div class="indicator-value">— <small>min</small></div>
+<div class="indicator-baseline"><span>Daily target 30–60 min</span><span class="mini-sparkline violet">—</span></div>
+</article>
+<article class="panel indicator-card" data-metric="heart_rate_variability">
+<div class="indicator-top"><span class="indicator-icon hrv">⌁</span><span class="status-pill good"><i></i> LOADING</span></div>
+<span class="indicator-name">Heart rate variability</span><div class="indicator-value">— <small>ms</small></div>
+<div class="indicator-baseline"><span>Baseline 45–65 ms</span><span class="mini-sparkline">—</span></div>
+</article>
+<article class="panel indicator-card" data-metric="blood_pressure">
+<div class="indicator-top"><span class="indicator-icon pressure">↕</span><span class="status-pill good"><i></i> LOADING</span></div>
+<span class="indicator-name">Blood pressure</span><div class="indicator-value">— <small>mmHg</small></div>
+<div class="indicator-baseline"><span>Personal range 105–125 / 65–82</span><span class="mini-sparkline">—</span></div>
+</article>
+<article class="panel indicator-card" data-metric="hydration_liters">
+<div class="indicator-top"><span class="indicator-icon hydration">◌</span><span class="status-pill good"><i></i> LOADING</span></div>
+<span class="indicator-name">Hydration logged</span><div class="indicator-value">— <small>L</small></div>
+<div class="indicator-baseline"><span>Daily target 2.0–2.5 L</span><span class="mini-sparkline">—</span></div>
+</article>
+<article class="panel indicator-card" data-metric="stress_score">
+<div class="indicator-top"><span class="indicator-icon stress">⌁</span><span class="status-pill good"><i></i> LOADING</span></div>
+<span class="indicator-name">Stress check-in</span><div class="indicator-value">— <small>/ 5</small></div>
+<div class="indicator-baseline"><span>Self-reported</span><span class="mini-sparkline">—</span></div>
+</article>
+<article class="panel indicator-card" data-metric="bone_loading_minutes">
+<div class="indicator-top"><span class="indicator-icon bone">◇</span><span class="status-pill good"><i></i> LOADING</span></div>
+<span class="indicator-name">Bone-loading exercise</span><div class="indicator-value">— <small>min</small></div>
+<div class="indicator-baseline"><span>Against scheduled exercise plan</span><span class="mini-sparkline">—</span></div>
+</article>
+<article class="panel indicator-card" data-self-report="">
+<div class="indicator-top"><span class="indicator-icon immune">+</span><span class="status-pill good"><i></i> CHECK-IN</span></div>
+<span class="indicator-name">Daily mood check-in</span><div class="indicator-value">No check-in</div>
+<div class="indicator-baseline"><span>Self-reported · not a health assessment</span><span class="mini-sparkline">—</span></div>
+</article>
+</div></section></div><details class="homepage-research-details"><summary>Source datasets &amp; mission context</summary><div class="overview-section-heading research-details-note"><div><span class="eyebrow">OBSERVATION SUMMARY</span><strong>NASA research &amp; spacecraft context</strong></div><button class="text-button" data-navigate="research" type="button">Browse source records ↗</button></div><section aria-label="Research and spacecraft snapshot" class="dashboard-stat-strip">
+<button class="dashboard-stat-card research-stat" data-dataset="OSD-575" data-navigate="research" type="button">
+<span class="dashboard-stat-icon serum-icon">◉</span>
+<span class="dashboard-stat-copy"><span>Blood serum · OSD-575</span><strong id="dashboard-serum-count">—</strong><small>source measurements</small></span>
+<span aria-hidden="true" class="dashboard-stat-arrow">↗</span>
+</button>
+<button class="dashboard-stat-card research-stat" data-dataset="OSD-656" data-navigate="research" type="button">
+<span class="dashboard-stat-icon urine-icon">◌</span>
+<span class="dashboard-stat-copy"><span>Urine immune · OSD-656</span><strong id="dashboard-urine-count">—</strong><small>source measurements</small></span>
+<span aria-hidden="true" class="dashboard-stat-arrow">↗</span>
+</button>
+<button class="dashboard-stat-card research-stat" data-dataset="OSD-569" data-navigate="research" type="button">
+<span class="dashboard-stat-icon blood-icon">⌁</span>
+<span class="dashboard-stat-copy"><span>Whole blood CBC · OSD-569</span><strong id="dashboard-cbc-count">—</strong><small>source measurements</small></span>
+<span aria-hidden="true" class="dashboard-stat-arrow">↗</span>
+</button>
+<button class="dashboard-stat-card spacecraft-stat" data-navigate="spacecraft" type="button">
+<span class="dashboard-stat-icon environment-icon">⌖</span>
+<span class="dashboard-stat-copy"><span>Cabin carbon dioxide</span><strong><span id="dashboard-co2-value">—</span> <small>ppm</small></strong><small>illustrative · latest demo sample</small></span>
+<span aria-hidden="true" class="dashboard-stat-arrow">↗</span>
+</button>
+</section></details>
+<div class="api-error-banner" hidden="" id="api-error-banner" role="alert"></div>
+
+<div class="lower-grid context-only-grid">
+<section class="panel environment-panel">
+<div class="panel-heading"><div><span class="eyebrow">MISSION ENVIRONMENT</span><span class="info-dot" title="Illustrative context only. Not a live radiation monitor or mission feed.">i</span></div><span class="sim-tag">ILLUSTRATIVE</span></div>
+<div class="environment-content"><span class="radiation-icon">☼</span><div><span class="environment-name">Radiation context</span><strong id="radiation-context">Elevated <small>relative to demo baseline</small></strong><span class="environment-note">Example mission-context indicator · not a dosimeter reading</span></div></div>
+<div class="environment-footer"><span>MISSION PHASE</span><strong id="mission-phase">Transit · Day 042</strong></div>
+</section>
+</div>
+<footer class="page-footer"><span>ASTROHEALTH <b>·</b> PROTOTYPE</span><span>Not a medical device. Not for diagnosis or treatment.</span></footer>
+</section>
+<section class="view" id="control-view">
+<div class="page-heading cinematic-hero">
+<div><p class="eyebrow">CREW HEALTH OVERVIEW <span class="heading-dot"></span> DEMO DATA</p><h1>Mission <em>Control</em></h1><p class="subheading">Select a crew member to explore their own simulated health report.</p></div>
+<span class="crew-total">5 CREW MEMBERS <i></i></span>
+</div>
+<div class="demo-banner"><span>ⓘ</span><span><strong>Prototype data:</strong> All crew profiles and readings are simulated. No live telemetry or medical records are connected.</span><button aria-label="Dismiss demo notice" class="dismiss-view-banner">×</button></div>
+<div class="api-error-banner" hidden="" id="control-api-error-banner" role="alert"></div><div class="control-layout"><section class="panel crew-panel">
+<div class="panel-heading"><div><h2>Crew status</h2><p>Summary indicators compared to each person’s own baseline</p></div><span class="sim-tag">SIMULATED PROFILES</span></div><div class="crew-roster" id="crew-roster"></div>
+<div class="crew-privacy"><span>◈</span> Fictional crew and simulated measurements. Profiles display only this local demonstration database.</div>
+<details class="crew-detail-table"><summary>View full crew measurement table</summary><div class="crew-table-wrap"><table class="crew-table">
+<thead><tr><th>CREW MEMBER</th><th>STATUS</th><th title="Fictional demo index; not a clinical score">DEMO INDEX</th><th>RESTING HR</th><th>SPO₂</th><th>BP</th><th>HRV</th><th>TEMP</th><th>SLEEP</th><th>EXERCISE</th><th>LAST CHECK-IN</th><th></th></tr></thead>
+<tbody id="crew-table-body">
+<tr><td><span class="crew-person"><span class="avatar crew-avatar avatar-lilac">JM</span><span><strong>Jordan Miller</strong><small>Commander</small></span></span></td><td><span class="status-pill good"><i></i> STABLE</span></td><td><strong class="score-number">92</strong><span class="score-denom"> / 100</span></td><td>64 <small>bpm</small></td><td>99%</td><td>116/74</td><td>61 <small>ms</small></td><td>36.6°</td><td>7.5 <small>hrs</small></td><td>48 <small>min</small></td><td>Today, 14:18</td><td><button aria-label="View Jordan Miller" class="row-arrow" data-crew="Jordan Miller">↗</button></td></tr>
+<tr><td><span class="crew-person"><span class="avatar crew-avatar avatar-coral">AK</span><span><strong>Amara Kim</strong><small>Flight engineer</small></span></span></td><td><span class="status-pill good"><i></i> STABLE</span></td><td><strong class="score-number">90</strong><span class="score-denom"> / 100</span></td><td>71 <small>bpm</small></td><td>98%</td><td>120/78</td><td>52 <small>ms</small></td><td>36.7°</td><td>7.2 <small>hrs</small></td><td>38 <small>min</small></td><td>Today, 13:56</td><td><button aria-label="View Amara Kim" class="row-arrow" data-crew="Amara Kim">↗</button></td></tr>
+<tr><td><span class="crew-person"><span class="avatar crew-avatar avatar-gold">LS</span><span><strong>Leo Santos</strong><small>Mission specialist</small></span></span></td><td><span class="status-pill watch"><i></i> REVIEW</span></td><td><strong class="score-number">74</strong><span class="score-denom"> / 100</span></td><td>76 <small>bpm</small></td><td>97%</td><td>122/80</td><td>43 <small>ms</small></td><td>36.9°</td><td>6.4 <small>hrs</small><span class="table-watch"> · watch</span></td><td>31 <small>min</small></td><td>Today, 14:02</td><td><button aria-label="View Leo Santos" class="row-arrow" data-crew="Leo Santos">↗</button></td></tr>
+<tr><td><span class="crew-person"><span class="avatar crew-avatar avatar-blue">MC</span><span><strong>Maya Chen</strong><small>Payload specialist</small></span></span></td><td><span class="status-pill good"><i></i> STABLE</span></td><td><strong class="score-number">89</strong><span class="score-denom"> / 100</span></td><td>66 <small>bpm</small></td><td>98%</td><td>114/72</td><td>57 <small>ms</small></td><td>36.5°</td><td>7.6 <small>hrs</small></td><td>45 <small>min</small></td><td>Today, 13:48</td><td><button aria-label="View Maya Chen" class="row-arrow" data-crew="Maya Chen">↗</button></td></tr>
+<tr><td><span class="crew-person"><span class="avatar crew-avatar avatar-slate">EO</span><span><strong>Elias Okafor</strong><small>Mission specialist</small></span></span></td><td><span class="status-pill good"><i></i> STABLE</span></td><td><strong class="score-number">91</strong><span class="score-denom"> / 100</span></td><td>69 <small>bpm</small></td><td>99%</td><td>119/77</td><td>59 <small>ms</small></td><td>36.7°</td><td>7.3 <small>hrs</small></td><td>50 <small>min</small></td><td>Today, 13:39</td><td><button aria-label="View Elias Okafor" class="row-arrow" data-crew="Elias Okafor">↗</button></td></tr>
+</tbody>
+</table></div></details></section><div class="control-middle"><div class="control-summary">
+<article class="panel summary-card"><span class="eyebrow">CREW IN RANGE</span><strong><span id="crew-in-range-count">4</span> <small>/ <span id="crew-total-count">5</span></small></strong><span class="summary-foot"><i class="green-dot"></i> Within configured demo ranges</span></article>
+<article class="panel summary-card"><span class="eyebrow">PATTERNS TO REVIEW</span><strong id="pattern-count">1</strong><span class="summary-foot"><i class="amber-dot"></i> Numerical range comparisons</span></article>
+<article class="panel summary-card"><span class="eyebrow">MISSION DAY</span><strong id="control-mission-day">042</strong><span class="summary-foot" id="control-mission-phase">Transit phase · Artemis III</span></article>
+</div><section aria-label="Crew observation overview" class="panel control-image">
+  <div class="control-image-content">
+    <span class="eyebrow">LOCAL DEMO · RECENT OBSERVATION</span>
+    <h3 id="control-focus-heading">Crew observation summary</h3>
+    <p id="control-focus-description">Reviewing the saved crew measurements…</p>
+    <button class="control-image-link" data-navigate="alerts" type="button">Inspect recorded patterns ↗</button>
+  </div>
+</section></div><div class="control-right"><section class="panel control-alert"><div class="alert-icon">↘</div><div><span class="eyebrow">PERSONALIZED DATA / DEMO CREW</span><h3>Review individual records in crew profiles</h3><p>Select any astronaut above to inspect saved readings, timestamps and example range comparisons. No clinical interpretation is provided.</p></div><span class="status-pill watch"><i></i> LOW PRIORITY</span></section><div class="panel connection-summary"><div class="panel-heading"><h2>Monitoring source</h2></div><div class="status-led-row"><span class="led cyan"></span><span>Local demo measurements</span><b>SIMULATED</b></div><div class="status-led-row"><span class="led gold"></span><span>Research measurements</span><b>SEPARATE</b></div><p>No live spacecraft system, medical-device or crew connection is present.</p></div></div></div>
+<footer class="page-footer"><span>ASTROHEALTH <b>·</b> PROTOTYPE</span><span>Not a medical device. Not for diagnosis or treatment.</span></footer>
+</section>
+<section class="view" id="timeline-view">
+<div class="page-heading cinematic-hero"><div><p class="eyebrow">PERSONAL HEALTH HISTORY <span class="heading-dot"></span> MISSION DAY <span id="timeline-mission-day">042</span></p><h1>Health <em>Timeline</em></h1><p class="subheading">Compare one selected measurement with its configured baseline across 30 saved days.</p></div><button class="secondary-button" id="timeline-checkin">＋ Log today’s check-in</button></div>
+<div class="demo-banner"><span>ⓘ</span><span><strong>Prototype data:</strong> This timeline uses illustrative readings and does not represent actual astronaut health data.</span><button aria-label="Dismiss demo notice" class="dismiss-view-banner">×</button></div><div class="timeline-quick"><article class="panel"><span>♡   Resting heart rate</span><strong id="timeline-quick-hr">—</strong><small>Selected astronaut · demo</small></article><article class="panel"><span>◉   Blood oxygen</span><strong id="timeline-quick-oxygen">—</strong><small>Selected astronaut · demo</small></article><article class="panel"><span>☾   Sleep duration</span><strong id="timeline-quick-sleep">—</strong><small>Last saved sleep reading</small></article><article class="panel"><span>♨   Temperature</span><strong id="timeline-quick-temp">—</strong><small>Selected astronaut · demo</small></article></div>
+<section class="panel timeline-main">
+<div class="panel-heading"><div><span class="eyebrow">30-DAY TREND</span><h2 id="timeline-metric-heading">Resting heart rate</h2></div><select aria-label="Select timeline metric" class="select-button chart-metric-dropdown" id="timeline-metric"></select></div>
+<div class="timeline-metrics"><div><span class="eyebrow">LATEST READING</span><strong id="timeline-current">—</strong><span class="chart-delta positive">Loading saved trend…</span></div><div><span class="eyebrow">CONFIGURED REFERENCE RANGE</span><strong id="timeline-baseline">62–72 <small>bpm</small></strong><span class="muted">Illustrative range · not a clinical threshold</span></div></div>
+<div aria-live="polite" class="timeline-stat-grid">
+<div><span>30-DAY AVERAGE</span><strong id="timeline-average">—</strong></div>
+<div><span>30-DAY LOW</span><strong id="timeline-minimum">—</strong></div>
+<div><span>30-DAY HIGH</span><strong id="timeline-maximum">—</strong></div>
+<div><span>READINGS</span><strong id="timeline-reading-count">—</strong></div>
+</div>
+<div class="large-chart" id="large-chart"><div class="chart-grid-labels"><span id="y-label-1">—</span><span id="y-label-2">—</span><span id="y-label-3">—</span><span id="y-label-4">—</span></div><svg aria-label="30-day health measurement trend" preserveaspectratio="none" role="img" viewbox="0 0 900 240"><line class="grid-line" x1="0" x2="900" y1="24" y2="24"></line><line class="grid-line" x1="0" x2="900" y1="85" y2="85"></line><line class="grid-line" x1="0" x2="900" y1="146" y2="146"></line><line class="grid-line" x1="0" x2="900" y1="207" y2="207"></line><line class="baseline-line" x1="0" x2="900" y1="115" y2="115"></line><path d="M0,126 C45,116 60,120 96,105 S145,125 192,102 S240,110 288,92 S335,115 384,96 S430,104 480,80 S530,91 576,66 S625,88 672,72 S720,81 768,52 S815,70 864,48 S885,57 900,39 L900,240 L0,240 Z" fill="none" id="large-area"></path><path d="M0,126 C45,116 60,120 96,105 S145,125 192,102 S240,110 288,92 S335,115 384,96 S430,104 480,80 S530,91 576,66 S625,88 672,72 S720,81 768,52 S815,70 864,48 S885,57 900,39" fill="none" id="large-line" stroke="#a7d8f0" stroke-width="3" vector-effect="non-scaling-stroke"></path><circle cx="900" cy="39" fill="#a7d8f0" r="5" stroke="#ffffff" stroke-width="3" vector-effect="non-scaling-stroke"></circle><g id="large-points"></g></svg><div class="chart-x-labels"><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span></div></div>
+<div class="chart-legend"><span><i class="legend-line"></i> Your readings</span><span><i class="legend-dash"></i> Personal baseline</span></div>
+</section>
+<div class="timeline-lower">
+<section class="panel trend-insight"><span class="insight-icon">✳</span><div><span class="eyebrow">TREND SUMMARY · ILLUSTRATIVE</span><h3>Loading selected metric trend…</h3><p>The timeline shows saved demo readings against the configured reference range.</p></div></section>
+<section class="panel checkin-card"><div class="panel-heading"><div><span class="eyebrow">LATEST CHECK-IN</span><h3 id="checkin-timestamp">Today · 14:25 UTC</h3></div><span class="status-pill good"><i></i> LOGGED</span></div><div class="checkin-mini-grid"><span>Energy <b id="checkin-energy">4 / 5</b></span><span>Stress <b id="checkin-stress">2 / 5</b></span><span>Mood <b id="checkin-mood">Good</b></span><span>Sleep <b id="checkin-sleep">6.1 hrs</b></span></div></section>
+</div>
+<footer class="page-footer"><span>ASTROHEALTH <b>·</b> PROTOTYPE</span><span>Not a medical device. Not for diagnosis or treatment.</span></footer>
+</section>
+<section class="view" id="spacecraft-view">
+<div class="page-heading cinematic-hero">
+<div>
+<p class="eyebrow">VEHICLE ENVIRONMENT <span class="heading-dot"></span> DAILY DEMO SERIES</p>
+<h1>Space<em>craft</em></h1>
+<p class="subheading">Demonstration cabin environment and accumulated radiation-dose history.</p>
+</div>
+</div>
+<div class="demo-banner spacecraft-notice"><span>ⓘ</span><span><strong>Illustrative telemetry:</strong> These values are generated demo readings, not live spacecraft sensors, operational limits, or mission data. A new daily sample is added as the date advances.</span></div>
+<div class="api-error-banner" hidden="" id="spacecraft-api-error" role="alert"></div>
+<div class="spacecraft-metric-grid">
+<article class="panel spacecraft-metric-card">
+<span class="eyebrow">CARBON DIOXIDE</span><strong id="spacecraft-co2-value">—</strong><span>ppm</span>
+</article>
+<article class="panel spacecraft-metric-card">
+<span class="eyebrow">CABIN TEMPERATURE</span><strong id="spacecraft-temperature-value">—</strong><span>°C</span>
+</article>
+<article class="panel spacecraft-metric-card">
+<span class="eyebrow">RELATIVE HUMIDITY</span><strong id="spacecraft-humidity-value">—</strong><span>% RH</span>
+</article>
+<article class="panel spacecraft-metric-card">
+<span class="eyebrow">ACCUMULATED RADIATION DOSE</span><strong id="spacecraft-dose-value">—</strong><span>mSv · illustrative</span>
+</article>
+</div>
+<section class="panel spacecraft-timeline">
+<div class="panel-heading spacecraft-chart-heading">
+<div><span class="eyebrow">ROLLING DAILY HISTORY</span><h2 id="spacecraft-chart-heading">Carbon dioxide</h2></div>
+<span class="sim-tag">30 DAYS · SIMULATED</span>
+</div>
+<div aria-label="Select spacecraft metric to chart" class="spacecraft-metric-tabs" role="group">
+<button aria-pressed="true" class="spacecraft-metric-button selected" data-spacecraft-metric="carbon_dioxide_ppm" type="button">CO₂</button>
+<button aria-pressed="false" class="spacecraft-metric-button" data-spacecraft-metric="cabin_temperature_c" type="button">Temperature</button>
+<button aria-pressed="false" class="spacecraft-metric-button" data-spacecraft-metric="relative_humidity_pct" type="button">Humidity</button>
+<button aria-pressed="false" class="spacecraft-metric-button" data-spacecraft-metric="accumulated_radiation_dose_msv" type="button">Radiation dose</button>
+</div>
+<div class="spacecraft-stats">
+<div><span>LATEST</span><strong id="spacecraft-chart-latest">—</strong></div>
+<div><span>30-DAY AVERAGE</span><strong id="spacecraft-chart-average">—</strong></div>
+<div><span>30-DAY LOW</span><strong id="spacecraft-chart-minimum">—</strong></div>
+<div><span>30-DAY HIGH</span><strong id="spacecraft-chart-maximum">—</strong></div>
+</div>
+<div class="spacecraft-chart" id="spacecraft-chart">
+<div class="spacecraft-y-labels" id="spacecraft-y-labels"><span>—</span><span>—</span><span>—</span><span>—</span></div>
+<svg aria-label="Thirty-day spacecraft environmental readings" preserveaspectratio="none" role="img" viewbox="0 0 900 240">
+<line class="grid-line" x1="0" x2="900" y1="24" y2="24"></line>
+<line class="grid-line" x1="0" x2="900" y1="85" y2="85"></line>
+<line class="grid-line" x1="0" x2="900" y1="146" y2="146"></line>
+<line class="grid-line" x1="0" x2="900" y1="207" y2="207"></line>
+<path d="" fill="none" id="spacecraft-chart-area"></path>
+<path d="" fill="none" id="spacecraft-chart-line" stroke="#087f78" stroke-width="3" vector-effect="non-scaling-stroke"></path>
+<g id="spacecraft-chart-points"></g>
+</svg>
+<div class="chart-x-labels"><span>—</span><span>—</span><span>—</span><span>—</span><span>—</span></div>
+</div>
+<p class="spacecraft-chart-note">The accumulated-dose line is an illustrative cumulative series. It is not a dosimeter measurement or exposure limit.</p>
+</section><div class="space-foot"><div class="panel space-foot-card"><span class="space-foot-icon">✦</span><div><strong>Environmental observations</strong><p>These generated readings demonstrate how an environmental panel could look; they are not operational spacecraft conditions.</p></div></div><div class="panel space-foot-card"><span class="space-foot-icon">◉</span><div><strong>Data provenance</strong><p>30-day simulated history stored locally in SQLite, never merged with NASA laboratory research.</p></div></div></div>
+<footer class="page-footer"><span>ASTROHEALTH <b>·</b> PROTOTYPE</span><span>No live spacecraft telemetry is connected.</span></footer>
+</section>
+<section class="view" id="research-view">
+<div class="page-heading cinematic-hero">
+<div>
+<p class="eyebrow">NASA OPEN RESEARCH <span class="heading-dot"></span> SOURCE DATA</p>
+<h1>NASA Research <em>Data</em></h1>
+<p class="subheading">Explore imported laboratory measurements with real source units and timepoints.</p>
+</div>
+</div>
+<div class="research-provenance" role="note">
+<strong>Research data is separate from the demo crew dashboard.</strong>
+            Participant codes and timepoints are preserved from the source exports. These are study observations, not live astronaut telemetry, personal health histories, or medical advice. Reference ranges are shown only where the source file provides them.
+          </div>
+<div aria-label="Select a NASA research dataset" class="research-dataset-list" id="research-dataset-list" role="group"></div>
+<section aria-labelledby="research-browser-heading" class="panel research-browser" id="research-browser" hidden>
+<div class="panel-heading">
+<div><span class="eyebrow">SOURCE MEASUREMENTS · SELECTED STUDY</span><h2 id="research-browser-heading">Dataset records</h2></div>
+<button class="secondary-button research-close" id="research-close" type="button">← Back to research library</button>
+</div>
+<p class="research-source-file" id="research-source-file"></p>
+<p class="research-browser-hint">Search the selected NASA dataset or narrow records using the source participant, measure, and timepoint.</p>
+<div class="research-filters">
+<label class="research-search-label">Search records<input id="research-search" type="search" placeholder="e.g. cortisol, L-01, preflight…" autocomplete="off" aria-label="Search source measurements"/></label>
+<label>Participant<select id="research-participant-filter"></select></label>
+<label>Biomarker / measure<select id="research-analyte-filter"></select></label>
+<label>Timepoint<select id="research-timepoint-filter"></select></label>
+</div>
+<p aria-live="polite" class="research-result-status" id="research-result-status" role="status">Loading research datasets…</p>
+<div class="research-table-wrap">
+<table class="research-table">
+<thead><tr><th>MEASUREMENT</th><th>PARTICIPANT</th><th>TIMEPOINT</th><th>PHASE</th><th>VALUE</th><th>UNIT</th><th>PROVENANCE</th></tr></thead>
+<tbody id="research-results"></tbody>
+</table>
+</div>
+<div class="research-pagination">
+<span id="research-page-status">—</span>
+<div><button class="secondary-button" disabled="" id="research-previous" type="button">Previous</button><button class="secondary-button" disabled="" id="research-next" type="button">Next</button></div>
+</div>
+</section>
+<footer class="page-footer"><span>ASTROHEALTH <b>·</b> NASA RESEARCH DATA</span><span>Research exports are not clinical guidance.</span></footer>
+</section>
+<section class="view" id="alerts-view">
+<div class="page-heading cinematic-hero">
+<div><p class="eyebrow">MISSION INTELLIGENCE <span class="heading-dot"></span> LOCAL DEMONSTRATION</p><h1><em>Alerts</em></h1>
+<p class="subheading">Evidence-linked range flags and missing-data notices from demo crew readings.</p></div>
+<span class="crew-total">SOURCE: LOCAL SQLITE <i></i></span>
+</div>
+<div class="demo-banner"><span>ⓘ</span><span><strong>Monitoring demonstration:</strong> Flags use configured prototype ranges; they are not medical alarms or clinical predictions. Only recorded readings generate flags.</span></div>
+<div class="alerts-summary-grid">
+<article class="panel summary-card"><span class="eyebrow">MEASUREMENTS TO REVIEW</span><strong id="alert-count-review">—</strong><span class="summary-foot amber-dot-caption">Outside configured demo ranges</span></article>
+<article class="panel summary-card"><span class="eyebrow">DATA GAPS</span><strong id="alert-count-missing">—</strong><span class="summary-foot">Missing latest indicators</span></article>
+<article class="panel summary-card"><span class="eyebrow">CHECKED ASTRONAUTS</span><strong id="alert-count-crew">—</strong><span class="summary-foot">Fictional crew · local database</span></article>
+<article class="panel summary-card"><span class="eyebrow">TOTAL SIGNALS</span><strong id="alert-count-total">—</strong><span class="summary-foot">Measured flags + missing data</span></article></div>
+<div class="alerts-content-grid">
+<section class="panel alerts-list-panel">
+<div class="panel-heading"><div><h2>Signal review queue</h2><p>Click a row to inspect its evidence</p></div><div class="alert-filters"><button class="alert-filter active" data-filter="all" type="button">All</button><button class="alert-filter" data-filter="review" type="button">Review</button><button class="alert-filter" data-filter="missing" type="button">Data gaps</button></div></div>
+<div class="alert-list" id="alert-list" role="list"><p class="empty-message">Loading source readings…</p></div>
+</section>
+<aside aria-live="polite" class="panel alert-inspector" id="alert-inspector"><span class="eyebrow">RECORD INSPECTOR</span><h2>Choose a signal</h2><p>Select an entry to see the crew member, exact source, observed value, recorded time, and configured demo range.</p></aside>
+</div>
+<footer class="page-footer"><span>ASTROHEALTH · NON-DIAGNOSTIC PROTOTYPE</span><span>Not for operational or medical decision-making.</span></footer>
+</section>
+<section class="view" id="profile-view">
+<div class="profile-back-row"><button class="secondary-button" id="back-to-crew">← Back to mission control</button><span class="sim-tag">FICTIONAL CREW · DEMO MEASUREMENTS</span></div>
+<div class="page-heading profile-heading cinematic-hero"><div><p class="eyebrow">CREW DOSSIER / MEASUREMENT HISTORY</p><h1 id="profile-name">Crew member</h1><p class="subheading" id="profile-role">Individual health profile</p></div><button class="primary-button" id="profile-timeline-link">View 30-day trends ↗</button></div>
+<div class="profile-summary-strip"><div class="panel profile-identity"><span class="profile-avatar" id="profile-avatar">JM</span><div><span class="eyebrow">SELECTED ASTRONAUT</span><h2 id="profile-identity-name">—</h2><p id="profile-identity-role">—</p></div></div><div class="panel profile-summary-stat"><span class="eyebrow">AVAILABLE INDICATORS</span><strong id="profile-indicator-count">—</strong><small>saved demo readings</small></div><div class="panel profile-summary-stat"><span class="eyebrow">WITHIN DEMO RANGES</span><strong id="profile-range-count">—</strong><small>not a clinical score</small></div></div>
+<div class="profile-section-head"><div><span class="eyebrow">LATEST SAVED OBSERVATIONS</span><h2>Individual measurements</h2></div><span class="sim-tag">Source and timestamp included</span></div>
+<div class="profile-metrics" id="profile-metrics"><p class="empty-message">Loading latest measurements…</p></div>
+<div class="profile-secondary-grid"><section class="panel profile-history-panel"><div class="panel-heading"><div><span class="eyebrow">TREND DETAIL</span><h2 id="profile-trend-title">Resting heart rate</h2></div><select aria-label="Choose metric for profile chart" id="profile-metric"></select></div><div class="profile-history-chart" id="profile-history-chart"></div><p class="profile-footnote">Saved daily demo readings · last 30 days. Source: local crew measurements.</p></section><section class="panel profile-checkins"><div class="panel-heading"><div><span class="eyebrow">CHECK-IN LOG</span><h2>Recent check-ins</h2></div></div><div id="profile-checkin-list">Loading…</div></section></div>
+<footer class="page-footer"><span>ASTROHEALTH / CREW DOSSIER</span><span>Simulated crew only · not a medical device.</span></footer>
+</section>
+</main>
+</div>
+<dialog class="checkin-dialog" id="checkin-dialog">
+<form id="checkin-form">
+<div class="dialog-heading"><div><span class="eyebrow">MISSION DAY <span id="checkin-mission-day">042</span> · DAILY LOG</span><h2>How are you feeling?</h2><p>A quick check-in helps add context to your trends.</p></div><button aria-label="Close daily check-in" class="dialog-close" id="close-checkin" type="button">×</button></div>
+<label class="form-label" for="energy">Energy <span>How energized do you feel?</span></label>
+<div class="range-control"><span>Low</span><input id="energy" max="5" min="1" type="range" value="4"/><output for="energy">4</output><span>High</span></div>
+<label class="form-label" for="stress">Stress <span>How stressed do you feel?</span></label>
+<div class="range-control"><span>Low</span><input id="stress" max="5" min="1" type="range" value="2"/><output for="stress">2</output><span>High</span></div>
+<label class="form-label" for="mood">Mood</label>
+<select id="mood"><option>Good</option><option>Okay</option><option>Low</option></select>
+<label class="form-label" for="sleep-hours">Sleep last night <span>hours</span></label>
+<input class="number-input" id="sleep-hours" max="24" min="0" required="" step="0.1" type="number" value="6.1"/>
+<div class="dialog-note">This check-in is saved to your local SQLite demonstration database. Do not enter real medical or personal information.</div>
+<p class="checkin-save-status" id="checkin-save-status" aria-live="polite" role="status"></p>
+<div class="dialog-actions"><button class="secondary-button" id="cancel-checkin" type="button">Cancel</button><button class="primary-button" id="save-checkin" type="submit">Save check-in</button></div>
+</form>
+</dialog>
+<dialog aria-labelledby="emergency-heading" class="emergency-dialog" id="emergency-dialog">
+<div class="emergency-dialog-content">
+<div class="emergency-dialog-heading">
+<div><span class="eyebrow">CREW SAFETY</span><h2 id="emergency-heading">Emergency guidance</h2></div>
+<button aria-label="Close emergency guidance" class="dialog-close" id="close-emergency" type="button">×</button>
+</div>
+<p class="emergency-warning"><strong>If this is a real emergency:</strong> use the spacecraft's approved alarm and communications procedures now. Follow the vehicle-specific checklist and crew commander/flight director instructions. This prototype is not an alert system.</p>
+<label class="emergency-label" for="emergency-scenario">Select a scenario</label>
+<select id="emergency-scenario">
+<option value="fire">Fire or smoke</option>
+<option value="pressure">Cabin pressure warning</option>
+<option value="radiation">Radiation event</option>
+<option value="medical">Crew medical emergency</option>
+<option value="atmosphere">Air-quality or toxic-atmosphere warning</option>
+</select>
+<section aria-live="polite" class="emergency-guidance-card">
+<h3 id="emergency-scenario-title">Fire or smoke</h3>
+<p id="emergency-scenario-guidance"></p>
+</section>
+<div class="emergency-drill">
+<div class="emergency-drill-heading"><div><span class="eyebrow">PRACTICE MODE</span><h3>Emergency drill test</h3></div><button class="secondary-button" id="start-emergency-drill" type="button">Start drill</button></div>
+<div aria-live="polite" id="emergency-drill-content"><p>Practice the first safe response for the selected scenario. This is a fictional drill; it will not contact anyone or activate equipment.</p></div>
+</div>
+</div>
+</dialog>
+<div aria-live="polite" class="toast" id="toast" role="status"></div>
+<script src="app.js"></script>
+</body>
+</html>
